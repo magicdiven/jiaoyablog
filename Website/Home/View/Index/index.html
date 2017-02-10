@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="PhpStorm">
+    <meta name="Author" content="丁小旺">
+    <meta name="Keywords"
+          content="个人网站，博客，论坛，留言板，PHP，Javascript，Jquery, Mysql, 养生，保健，网页设计，平面设计，网络营销，商战智慧，办公软件, 英语，音乐，Photoshop教程，AI教程，淘宝开店，免费教程，素材下载">
+    <meta name="Description"
+          content="（dingxw.com）本站是丁小旺在2016年5月21日创建的个人网站，内容涵盖博客，论坛，留言板，PHP，Javascript，Jquery, Mysql, 养生，保健，网页设计，平面设计，网络营销，商战智慧，办公软件, 英语，音乐，Photoshop教程，AI教程，淘宝开店，免费教程，素材下载等。">
+    <title>首页 - 丁小旺的个人网站</title>
+    <link type="image/x-icon" href="__PUBLIC__/images/admin/favico.ico" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/stylesheets/website/index.css"/>
+</head>
+<body>
+<!--top start-->
+<div class="t_head">
+    <div class="head_cont">
+        <a href="#"><img class="logo_zhuye" src="__PUBLIC__/images/admin/logo.png" alt="dingxw.com" width="50px"
+                         height="50px"/></a>
+
+        <p class="head_title">我是丁小旺，欢迎来到我的网站。</p>
+    </div>
+</div>
+<!--top end-->
+<!--t_gk start-->
+<div>
+    <div class="wth1000 menu_cont" id="menuCont">
+        <ul class="menu" id="menuList">
+            <li class='link_blog'>
+                <div></div>
+                <a href="{:U('Blog/index')}">博客</a></li>
+            <li class='link_youji'>
+                <div></div>
+                <a href="#">游记</a></li>
+            <li class='link_joke'>
+                <div></div>
+                <a href="#">笑话</a></li>
+            <li class='link_food'>
+                <div></div>
+                <a href="#">美食</a></li>
+            <li class='link_note'>
+                <div></div>
+                <a href="#">留言板</a></li>
+            <li class='link_master'>
+                <div></div>
+                <a href="#">联系站长</a></li>
+            <!--<li class='xkc_jq'><div></div><a href="#">新课程集群</a></li>-->
+            <!--<li class='gy_jq'><div></div><a href="#">工业集群</a></li>-->
+            <!--<li class='bk_jq'><div></div><a href="#">百科集群</a></li>-->
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>
+<!--t_gk end-->
+<!--底部 start-->
+<div class="t_footer">
+    <div class="t_yl">
+        友情链接：
+        <a href="http://xiangzongliang.com" target="_blank"> 言图网 </a>
+    </div>
+</div>
+
+<div class="copy">
+    Copyright © 2016 All Rights Reserved 版权所有：丁小旺 | 备案号：备案中
+</div>
+
+<!--底部 end-->
+</body>
+
+<script type="text/javascript">
+    var menuContul = document.getElementById("menuList");
+    var viewHeight = window.screen.height;
+    //如果是显示屏高768px
+    if (768 <= viewHeight && 1600 > viewHeight) {
+        menuContul.style.marginTop = 63 + viewHeight - 768 + "px";
+        menuContul.style.marginBottom = 63 + viewHeight - 768 + "px";
+    }
+</script>
+</html>

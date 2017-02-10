@@ -1,0 +1,38 @@
+<div class="article_list">
+    <?php
+             foreach ($blogs as $blog){
+             ?>
+    <div class="article_item">
+        <h1>
+            <div class="article_title">
+                <?php
+                            switch ($blog['article_type']){
+                                case "原创":
+                                    echo "<span style='color:#01B468'>原创</span>";
+                break;
+                case "转载":
+                echo "<span style='color:#666'>转载</span>";
+                break;
+                case "翻译":
+                echo "<span style='color:#842B00'>翻译</span>";
+                break;
+                }
+                ?>
+                <a href="{:U('Blog/article')}?details=<?php echo $blog['id']; ?>"><?php echo $blog['title']; ?></a>
+            </div>
+        </h1>
+        <div class="article_description">
+            <?php echo mb_strcut( (strip_tags($blog['content'])) ,0,300,'utf-8') , '...'; ?>
+        </div>
+        <div class="article_manage">
+            <span class="write_time"><?php echo date('Y-m-d H:i', $blog['created_at']); ?></span>
+                    <span class="read_times"><a href="{:U('Blog/article')}?details=<?php echo $blog['id']; ?>">阅读</a>
+                        (<?php echo $blog['read_times']>0?$blog['read_times']:0; ?>)</span>
+            <span class="comments"><a href="{:U('Blog/article')}?details=<?php echo $blog['id']; ?>#commentList">评论</a>(<?php echo $comment_articles[$blog['id']]?$comment_articles[$blog['id']]:0; ?>)</span>
+        </div>
+    </div>
+    <?php } ?>
+</div>
+<div class="pageList">
+    <span><?php echo '共',$totalRows,'篇文章&nbsp;&nbsp;&nbsp;',$page; ?></span>
+</div>

@@ -1,0 +1,171 @@
+<!--文章内容 start-->
+<div class="article_list">
+    <div class="article_item">
+        <h1><?php
+                    switch ($article['article_type']){
+                        case "原创":
+                            echo "<span style='color:#01B468'>原创</span>";
+                            break;
+                        case "转载":
+                            echo "<span style='color:#666'>转载</span>";
+                            break;
+                        case "翻译":
+                            echo "<span style='color:#842B00'>翻译</span>";
+                            break;
+                    }
+            ?>
+            <div class="article_title" style="text-align: center;">
+                <?php echo $article['title']; ?></a>
+            </div>
+        </h1>
+        <div class="article_manage">
+            <span class="write_time"><?php echo date('Y-m-d H:i', $article['created_at']); ?></span>
+            <span class="read_times"><?php echo $article['read_times']>0?$article['read_times']:0; ?>人阅读</span>
+            <span class="comments"><a href="__SELF__#dump_to_comment">评论</a>(<?php echo $comment_articles[$article['id']]?$comment_articles[$article['id']]:0; ?>)</span>
+        </div>
+        <div class="article_details" style="padding: 10px 10px;">
+            <div class="original_statement">
+            <span><?php
+                    switch ($article['article_type']){
+                        case "原创":
+                            echo "<span class='original_color'>★</span>","<span class='statement'>版权声明：本文为博主原创文章，未经博主允许不得转载。</span>";
+                            break;
+                    }
+            ?></span>
+            </div>
+            <?php echo $article['content']; ?>
+        </div>
+
+    </div>
+</div>
+<!--文章内容 end-->
+
+<!--上一篇 start-->
+<?php if ($pre_article['id']) { ?>
+<div class="pre_article"><a href="{:u('blog/article')}?details={$pre_article.id}">上一篇：{$pre_article.title}</a></div>
+<?php } ?>
+<!--上一篇 end-->
+<!--下一篇 start-->
+<?php if ($next_article['id']) { ?>
+<div class="next_article"><a href="{:u('blog/article')}?details={$next_article.id}">下一篇：{$next_article.title}</a></div>
+<?php } ?>
+<!--下一篇 end-->
+
+<!--评论 start-->
+<a name="commentList"></a>
+<div class="comment_list">
+    <!--查看评论 start-->
+    <div class="view_comment">
+        <div class="comment_list">评论列表</div>
+        <div class="comment_list_item">
+            <?php foreach ( $comment_list as $key=>$comment ) { ?>
+            <div class="single_comment">
+                <div class="comment_nick">{$comment.nick}</div>
+                <div class="comment_time">{$key+$floor_num}楼  <?php echo date('Y-m-d H:i', $comment['created_at']); ?></div>
+                <div class="comment_content">{$comment.comment}</div>
+                <!--站长回复游客内容 start-->
+                <?php if ( $master_reply[$comment['id']] ) { ?>
+                <div class="reply_to_visitor">
+                    <span class="rname">站长</span>回复<span class="rname">{$comment.nick}:</span>
+                    <span>{$master_reply[$comment['id']]}</span>
+                </div>
+                <?php } ?>
+                <!--站长回复游客内容 end-->
+                <!--登陆后站长可以回复，如果已经回复则不再支持回复。（版本升级后再支持无限级回复。） start-->
+                <?php if ($_SESSION['current_account']['id']) { if (!$master_reply[$comment['id']]) { ?>
+                <form action="{:U('Blog/master_reply')}" method="post">
+                    <input type="hidden" value="{$comment.id}" name="comment_id">
+                    <input type="hidden" name="blog_id" value="{$article.id}">
+                    <div class="master_reply">
+                        <span class="reply" onclick="Reply.createNew().toggle(this)">回复</span><input type='text' name="reply_content" />
+                        <input type="submit" value="回复" />
+                        <?php if ($_GET['error_msg_reply']) { ?>
+                        <span class="error_msg">{$_GET['error_msg_reply']}</span>
+                        <?php } ?>
+                    </div>
+                </form>
+                <?php } } ?>
+                <!--登陆后站长可以回复 end-->
+            </div>
+            <?php } ?>
+
+        </div>
+    </div>
+    <div class="pageList">
+        共<?php echo $total_comments['num']; ?>条评论。&nbsp;&nbsp;&nbsp;<span>{$page}</span>
+    </div>
+    <!--查看评论 end-->
+
+
+    <!--发表评论 start-->
+    <div class="comment">
+        <a name="dump_to_comment"></a>
+        <div class="comment_act">
+            <p>发表评论</p>
+        </div>
+        <div class="comment_body">
+        <form action="{:U('Blog/comment')}" method="post">
+            <!--昵称 start-->
+            <div class="comment_nick">
+                昵称：<input type="text" name="nick" placeholder="不超过20字" class="nick_input">
+                <?php if ($_GET['error_msg_nick']) { ?>
+                <span class="error_msg">{$_GET['error_msg_nick']}</span>
+                <?php } ?>
+            </div>
+            <!--昵称 end-->
+            <!--评论内容 start-->
+            评语：<div class="comment_content">
+                <div contenteditable="true" id="comment_div" class="comment_div"></div>
+                <?php if ($_GET['error_msg_comment']) { ?>
+                <span class="error_msg">{$_GET['error_msg_comment']}</span>
+                <?php } ?>
+            </div>
+            <!--用隐藏的input获取div的值，进行提交 -->
+            <input type="hidden" name="comment" id="comment">
+            <!--文章id-->
+            <input type="hidden" name="blog_id" value="{$article.id}">
+            <!--评论内容 end-->
+            <!--验证码 start-->
+            <div class="verifyCode">
+                验证码：<input class="verify_code" id="verify_code" name="verify_code" type="text" style="width:100px;" /> <img src="{:U('Blog/verifyCode')}"  title="看不清？单击此处刷新" onclick="this.src+='?rand='+Math.random();"  style="cursor: pointer; vertical-align: middle;"/>
+                <?php if ($_GET['error_msg_verifycode']) { ?>
+                    <span class="error_msg">{$_GET['error_msg_verifycode']}</span>
+                <?php } ?>
+            </div>
+            <!--验证码 end-->
+            <!--提交 start-->
+            <div class="submit_comment">
+                <input type="submit" onclick="getCommentVal()" value="发表">
+            </div>
+            <!--提交 end-->
+        </form>
+        </div>
+    </div>
+    <!--发表评论 end-->
+
+</div>
+<!--评论 end-->
+
+<script type="text/javascript">
+    /*    评论时，点击提交，将div的值传给input标签 start */
+    function getCommentVal(){
+        var divVal = $("#comment_div").html();
+        $("#comment").val(divVal);
+    }
+    /*    评论时，点击提交，将div的值传给input标签 end */
+
+    /*点击class=reply的span标签后，追加一个输入框和提交按钮，再点一下，输入框消失 start, 默认无输入框*/
+    var Reply = {
+        createNew: function(){
+            var reply = {};
+            reply.toggle = function(obj){
+                $(obj).next(".master_reply input").toggle();
+                $(obj).next(".master_reply input").next().toggle();
+            };
+
+            return reply;
+        }
+    };
+    /*点击id=reply的span标签后，追加一个输入框和提交按钮，原字样消失 end*/
+
+</script>

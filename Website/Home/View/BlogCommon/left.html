@@ -1,0 +1,130 @@
+<div id="Left">
+    <div class="left">
+        <!--博客资料 start-->
+        <div class="panel_profile panel">
+            <ul class="panel_head">
+                <span>博客资料</span>
+            </ul>
+            <ul class="blog_statistics panel_body">
+                <li>原创: &nbsp;<span><?php echo $original_article_num?$original_article_num:0; ?>篇</span></li>
+                <li>转载: &nbsp;<span><?php echo $reprinted_article_num?$reprinted_article_num:0; ?>篇</span></li>
+                <li>译文: &nbsp;<span><?php echo $translation_article_num?$translation_article_num:0; ?>篇</span></li>
+                <li>评论: &nbsp;<span><?php if (!$comment_num) echo 0; else echo $comment_num;?>条</span></li>
+            </ul>
+        </div>
+        <!--博客资料 end-->
+        <!--推荐文章 start-->
+        <div class="blog_recommend panel">
+            <div class="panel_head">
+                <span>每日推荐</span>
+            </div>
+            <div class="type_list">
+                <div class="panel_body">
+                    <ul class="blogRecommend">
+						<?php foreach ( $recommend_articles as $read_rank_key) { ?>
+                        <li><?php echo $read_rank[$read_rank_key]['title']; ?>
+                            <a href="{:U('Blog/article')}?details=<?php echo $read_rank[$read_rank_key]['id']; ?>">
+                            >>阅读</a>
+						</li>
+						<?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--推荐文章 end-->
+        <!--博客搜索 start-->
+        <div class="blog_search panel">
+            <div class="panel_head">
+                <span>文章搜索</span>
+            </div>
+            <div class="panel_body">
+                <form action="{:U('Blog/index')}" method="get" class="form_search">
+                    <span>
+                        <input class="blogsearch" name="articleName" type="text" value="<?php echo $articleName ?>">
+                    </span>
+                    <input type="submit" class="btnSubmit">
+                </form>
+            </div>
+        </div>
+        <!--博客搜索 end-->
+        <!--博客分类 start  以后等文章多了再分类，根据关键词来就行了-->
+        <!--<div class="blog_type panel">-->
+            <!--<div class="panel_head">-->
+                <!--<span>文章分类</span>-->
+            <!--</div>-->
+            <!--<div class="type_list">-->
+                <!--<div class="panel_body">-->
+                    <!--<ul class="blogType">-->
+                        <!--<li><a href="#">mac </a>()</li>-->
+                        <!--<li><a href="#">linux </a>()</li>-->
+                        <!--<li><a href="#">PHP </a>()</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--博客分类 end-->
+        <!--博客存档 start-->
+        <div class="blog_archive panel">
+            <div class="panel_head">
+                <span>文章存档</span>
+            </div>
+            <div class="type_list">
+                <div class="panel_body">
+                    <ul class="archiveTime">
+                        <?php foreach ( $archives_date as $archive_date ) { ?>
+                        <li>
+                            <a href="{:U('Blog/index')}?month=<?php echo $archive_date['date']; ?>">
+                                <?php echo date('Y年m月', strtotime($archive_date['date'])); ?>
+                            </a>(<?php echo $date_num[$archive_date['date']]; ?>)
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--博客存档 end-->
+        <!--阅读排行 start-->
+        <div class="read_rank panel">
+            <div class="panel_head">
+                <span>阅读排行</span>
+            </div>
+            <div class="type_list">
+                <div class="panel_body">
+                    <ul class="readRank">
+                        <?php for ( $i=0; $i<10; $i++) {
+                            if ( $read_rank[$i] ) { ?>
+                        <li><a href="{:U('Blog/article')}?details=<?php echo $read_rank[$i]['id']; ?>">
+                            <?php echo $read_rank[$i]['title']; ?></a>
+                            <span>(<?php echo $read_rank[$i]['read_times']; ?>)</span>
+                        </li>
+                        <?php } } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--阅读排行 end-->
+        <!--评论排行 start-->
+        <?php if ($comment_num) { ?>
+        <div class="blog_comments panel">
+            <div class="panel_head">
+                <span>评论排行</span>
+            </div>
+            <div class="type_list">
+                <div class="panel_body">
+                    <ul class="commentRank">
+                        <?php
+                        $i = 0;
+                        foreach ($comment_articles as $blog_id=>$comment_num2) {
+                            if ( $i < 10 ) {
+                                $i++;
+                        ?>
+                        <li><a href="{:U('Blog/article')}?details={$blog_id}"><?php echo $blog_id_to_title[$blog_id]; ?> </a><span>({$comment_num2})</span></li>
+                        <?php } } ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
+        <!--评论排行 end-->
+    </div>
+</div>

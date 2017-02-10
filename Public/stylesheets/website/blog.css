@@ -1,0 +1,295 @@
+body{
+    background: url("../../images/website/blog_body_bg.jpg");
+    background-position: 104px 37px;
+}
+.logo {
+    margin:8px 0 0 0; float:left;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*两列布局*/
+.blog_two_col{
+    width:1000px;
+    margin:120px auto 120px auto;
+}
+/*左列 start*/
+.left{
+    width:200px;
+    float: left;
+}
+
+.left a{
+    color: #CA0000;
+}
+
+.left a:hover{
+    color: #200;
+}
+
+/*轮廓*/
+.panel_profile{
+    height: 100px;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+/*博客资料 start*/
+.left .panel{
+    border: 1px solid #000;
+}
+.left .panel_head{
+    height: 30px;
+    background-color: #666;
+    text-indent: 5px;
+    line-height:30px;
+}
+.left .panel_body{
+    padding:4px 10px;
+}
+
+.panel_profile .blog_statistics{
+    list-style: none;
+    color: #666;
+    margin:10px 10px;
+}
+
+.blog_statistics li{
+    width: 50%;
+    float: left;
+    margin:4px 0;
+}
+/*博客资料 end*/
+
+/*博客搜索 start*/
+.left .blog_search{
+    margin: 10px 0;
+    height: 88px;
+    background-color: #fff;
+}
+
+.form_search {
+    background: #fff;
+    border: 1px solid #CCCCCC;
+    display: block;
+    height: 24px;
+    margin: 10px 0;
+    overflow: hidden;
+    padding: 0 3px;
+}
+
+.left .blogsearch{
+    float: left;
+    border: medium none;
+    color: #666;
+    height: 20px;
+    margin: 2px 5px 0 0;
+    width: 140px;
+}
+
+.left .btnSubmit{
+    background: url("../../images/website/ico_sear.png") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    cursor: pointer;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    margin: 5px 0 0;
+    overflow: hidden;
+    text-indent: -1000px;
+    width: 16px;
+    float: left;
+}
+/*博客搜索 end*/
+
+/*博客分类 start*/
+.left .type_list{
+    background-color: #fff;
+}
+
+.left .blogType,
+.left .archiveTime,
+.left .readRank,
+.left .commentRank,
+.left .blog_recommend
+{
+    list-style: none;
+}
+
+.left .blogType li,
+.left .archiveTime li,
+.left .readRank li,
+.left .commentRank li,
+.left .blog_recommend li
+{
+    margin: 4px 0;
+}
+/*博客分类 end*/
+
+/*博客存档 start*/
+.left .blog_archive,
+.left .read_rack,
+.left .blog_recommend,
+.left .blog_comments
+{
+    margin:10px 0;
+}
+/*博客存档 end*/
+
+/*阅读排行 start*/
+.readRank li a,
+.commentRank li a
+{
+    display: inline-block;
+    white-space: nowrap;
+    width: 145px;
+    height: 15px;
+    overflow: hidden;
+}
+.readRank li span,
+.commentRank li span
+{
+    display: inline-block;
+    height: 14px;
+    float: right;
+}
+/*阅读排行 end*/
+/*左列 end*/
+
+/*右列 start*/
+.right{
+    width: 778px;
+    float: left;
+    margin: 0 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+.right .article_list{
+    margin: 20px 20px 70px 20px;
+}
+
+.article_title{
+    margin: 5px 0;
+}
+
+.article_title a{
+    color: #000;
+    font:normal 20px/30px 'Microsoft YaHei';
+}
+
+.article_title a:hover{
+    color: #666;
+}
+
+.article_description{
+    color: #666;
+    font: normal 14px/24px Arial;
+    text-indent: 2em;
+}
+
+.article_manage {
+    padding: 5px 0;
+    color: #999;
+    font: normal 12px/24px Arial;
+    text-align: right;
+    border-bottom: 1px dashed #999;
+}
+
+.article_manage span{
+    margin:0 5px;
+}
+.article_manage a{
+    color:#ca0000;
+}
+
+.article_manage .write_time{
+    margin: 0 5px 0 0;
+}
+
+.article_manage .read_times{
+    padding:0 0 0 5px;
+}
+
+.pageList{
+    clear: both;
+    padding: 15px 0;
+    color: #666;
+    font: normal 12px/24px Arial;
+    text-align: center;
+}
+/*右列 end*/
+/*底部 start*/
+.t_foot{
+    background:#3d4a60;
+    height:40px;
+    width: 100%;
+    line-height:40px;
+    color:#fff;
+    font-size:14px;
+}
+
+.t_foot .t_yl{
+    text-align:center;
+}
+
+.t_foot .t_yl a{
+    text-decoration:none;
+    color:#f0f0f0;
+    font-size:14px;
+    font-family:"微软雅黑";
+}
+
+.t_foot .t_yl a:hover{
+    text-decoration:underline;
+}
+
+.copyright{
+    background:#293240;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    color:#f0f0f0;
+    font-size:14px;
+    font-family:"微软雅黑";
+}
+/*底部 end*/
+
+/*博客原创声明 start*/
+.original_statement{
+    margin-bottom: 10px;
+}
+
+.original_statement .statement{
+    color:#999;
+}
+
+.original_statement .original_color{
+    color: red;
+    margin-right: 5px;
+}
+/*博客原创声明 end*/
+
+.pre_article,
+.next_article{
+    text-align: center;
+    padding: 5px;
+}
+
+.pre_article a,
+.next_article a{
+    color: #CA9000;
+}
+
+.pre_article a:hover,
+.next_article a:hover{
+    color: #CA0000;
+}
+
+.my_blog{
+    width: 1000px;
+    color: #ffffff;
+    margin: 30px auto;
+    font-size: 30px;
+}

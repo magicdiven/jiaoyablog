@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <title><?php if ($article['title']) echo $article['title']; else { ?> 博客 - {:C('SITE_TITLE')} <?php } ?></title>
+    <base href="__MODULE__"/>
+    <!-- css -->
+    <include file="BlogCommon/stylesheets"/>
+    <!-- js -->
+    <include file="BlogCommon/javascripts"/>
+</head>
+
+<body>
+<div class="wrap">
+    <!-- header -->
+    <include file="BlogCommon/header"/>
+
+    <!-- main -->
+    <div class="blog_two_col">
+        <!-- left -->
+        <include file="BlogCommon/left"/>
+
+        <!-- right -->
+        <div id="Right">
+            <div class="right">
+                {__CONTENT__}
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <!-- footer -->
+    <include file="BlogCommon/footer"/>
+</div>
+</body>
+</html>
